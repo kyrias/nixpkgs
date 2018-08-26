@@ -15,7 +15,7 @@ python3Packages.buildPythonApplication rec {
     sha256 = "0r4mc23chxlaym7jcjnflw7mn5nbw3q8q4ix0nim7lh98yfndd3b";
   };
 
-  propagatedBuildInputs = with python3Packages; [ keyring colour netifaces praw psutil basiciw ] ++
+  propagatedBuildInputs = with python3Packages; [ keyring colour netifaces praw psutil basiciw pysensors ] ++
     [ libpulseaudio ] ++ extraLibs;
 
   libpulseaudioPath = stdenv.lib.makeLibraryPath [ libpulseaudio ];
