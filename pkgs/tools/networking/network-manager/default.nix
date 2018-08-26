@@ -3,7 +3,8 @@
 , libgcrypt, dnsmasq, bluez5, readline
 , gobjectIntrospection, modemmanager, openresolv, libndp, newt, libsoup
 , ethtool, gnused, coreutils, file, inetutils, kmod, jansson, libxslt
-, python3Packages, docbook_xsl, openconnect, curl, autoreconfHook }:
+, python3Packages, docbook_xsl, openconnect, curl, autoreconfHook
+, iwdSupport ? false, iwd}:
 
 let
   pname = "NetworkManager";
@@ -63,6 +64,7 @@ in stdenv.mkDerivation rec {
     "--disable-gtk-doc"
     "--with-libnm-glib" # legacy library, TODO: remove
     "--disable-tests"
+    (stdenv.lib.withFeature iwdSupport "iwd")
   ];
 
   patches = [
@@ -85,7 +87,8 @@ in stdenv.mkDerivation rec {
   buildInputs = [
     systemd libuuid polkit ppp libndp curl
     bluez5 dnsmasq gobjectIntrospection modemmanager readline newt libsoup jansson
-  ];
+  ] ++
+    stdenv.lib.optional iwdSupport iwd;
 
   propagatedBuildInputs = [ dbus-glib gnutls libgcrypt python3Packages.pygobject3 ];
 
