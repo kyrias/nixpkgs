@@ -17708,6 +17708,11 @@ in
     ];
   };
 
+  linux_drm_intel_next = callPackage ../os-specific/linux/kernel/linux-drm-intel-next.nix {
+    kernelPatches = [
+    ];
+  };
+
   linux_testing = callPackage ../os-specific/linux/kernel/linux-testing.nix {
     kernelPatches = [
       kernelPatches.bridge_stp_helper
@@ -17965,6 +17970,7 @@ in
   linuxPackages_4_19 = recurseIntoAttrs (linuxPackagesFor pkgs.linux_4_19);
   linuxPackages_5_4 = recurseIntoAttrs (linuxPackagesFor pkgs.linux_5_4);
   linuxPackages_5_10 = recurseIntoAttrs (linuxPackagesFor pkgs.linux_5_10);
+  linuxPackages_drm_intel_next = recurseIntoAttrs (linuxPackagesFor pkgs.linux_drm_intel_next);
 
   # When adding to the list above:
   # - Update linuxPackages_latest to the latest version
